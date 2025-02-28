@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Input for A</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            background-color: black;
+            color: white;
+            font-size: 24px;
+            border: 1px solid white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>텍스트 입력 (A)</h1>
+    <textarea id="inputText" placeholder="텍스트를 입력하세요..."></textarea>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+    <script>
+        // Firebase 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyBMbEBNGO9pqvvHSw1HcvPBwdGndJzMbfc",
+            authDomain: "ysb-project1.firebaseapp.com",
+            databaseURL: "https://ysb-project1-default-rtdb.firebaseio.com", // Firebase Realtime Database URL
+            projectId: "ysb-project1",
+            storageBucket: "ysb-project1.firebasestorage.app",
+            messagingSenderId: "1094036056037",
+            appId: "1:1094036056037:web:96bbc764e29568e03bb10c"
+        };
+
+        // Firebase 초기화
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database(app);
+
+        // 실시간으로 입력되는 텍스트를 Firebase에 업데이트
+        document.getElementById('inputText').addEventListener('input', function() {
+            const inputText = document.getElementById('inputText').value;
+            const textRef = database.ref('text');
+            textRef.set(inputText);  // Firebase에 텍스트 전송
+        });
+    </script>
+</body>
+</html>
